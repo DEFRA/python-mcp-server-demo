@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from .entrypoints.http.main import api
+from app.entrypoints.http.main import api
 
 client = TestClient(api)
 
