@@ -1,14 +1,8 @@
 from fastapi.testclient import TestClient
 
-from .main import app
+from app.entrypoints.http.main import api
 
-client = TestClient(app)
-
-
-def test_example():
-    response = client.get("/example/test")
-    assert response.status_code == 200
-    assert response.json() == {"ok": True}
+client = TestClient(api)
 
 
 def test_health():
