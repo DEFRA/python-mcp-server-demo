@@ -1,4 +1,4 @@
-from contextlib import asynccontextmanager
+from contextlib import AsyncExitStack, asynccontextmanager
 from logging import getLogger
 
 import uvicorn
@@ -7,8 +7,8 @@ from fastapi import FastAPI
 from app.common.mongo import get_mongo_client
 from app.common.tracing import TraceIdMiddleware
 from app.config import config
-from app.example.router import router as example_router
 from app.health.router import router as health_router
+from app.mcp.demo_server.server import demo_mcp_server
 
 logger = getLogger(__name__)
 
@@ -18,26 +18,30 @@ async def lifespan(_: FastAPI):
     # Startup
     client = await get_mongo_client()
     logger.info("MongoDB client connected")
-    yield
+
+    async with AsyncExitStack() as stack:
+        await stack.enter_async_context(demo_mcp_server.session_manager.run())
+        yield
+
     # Shutdown
     if client:
         await client.close()
         logger.info("MongoDB client closed")
 
-
-app = FastAPI(lifespan=lifespan)
+api = FastAPI(lifespan=lifespan)
 
 # Setup middleware
-app.add_middleware(TraceIdMiddleware)
+api.add_middleware(TraceIdMiddleware)
 
 # Setup Routes
-app.include_router(health_router)
-app.include_router(example_router)
+api.include_router(health_router)
+
+api.mount("/", demo_mcp_server.streamable_http_app())
 
 
 def main() -> None:
     uvicorn.run(
-        "app.main:app",
+        "app.entrypoints.http.main:api",
         host=config.host,
         port=config.port,
         log_config=config.log_config,
