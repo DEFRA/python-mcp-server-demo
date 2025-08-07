@@ -18,6 +18,12 @@ def add(x: int, y: int) -> int:
 
 
 @demo_mcp_server.tool()
+def subtract(x: int, y: int) -> int:
+    """Subtract two numbers."""
+    return x - y
+
+
+@demo_mcp_server.tool()
 def get_weather(location: str) -> WeatherData:
     """Get the current weather in a given location"""
 
