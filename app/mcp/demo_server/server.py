@@ -1,6 +1,7 @@
-from pydantic import BaseModel
-from mcp.server.fastmcp import FastMCP
 from random import randint
+
+from mcp.server.fastmcp import FastMCP
+from pydantic import BaseModel
 
 
 class WeatherData(BaseModel):
@@ -29,6 +30,6 @@ def get_weather(location: str) -> WeatherData:
 
     return WeatherData(
         location=location,
-        temperature=f"{randint(1, 30)}°C",
+        temperature=f"{randint(1, 30)}°C", # noqa: S311
         condition="Sunny"
     )
