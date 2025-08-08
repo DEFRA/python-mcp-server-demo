@@ -7,6 +7,7 @@ A Model Context Protocol (MCP) demo server written in Python.
 - [pipx](https://pipxproject.github.io/pipx/installation/)
 - [uv](https://docs.astral.sh/uv/getting-started/installation/) 
 - [Docker and Docker Compose](https://docs.docker.com/get-docker/) - Optional if running via stdio.
+- [MCP Inspector](https://github.com/modelcontextprotocol/inspector)
 
 ## Requirements
 
@@ -66,6 +67,8 @@ To run the MCP server in stdio mode, you will need to follow these steps:
 1. Sync the dependencies using `uv sync`
 2. Build the Python package using `uv build`
 3. Install the package globally using `pipx install .` or `pipx install . --force` if you have previously installed it.
+
+Both modes can be tested using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector).
 
 ## Local development
 
@@ -132,11 +135,7 @@ uv run pytest
 
 | Endpoint             | Description                    |
 | :------------------- | :----------------------------- |
-| `GET: /docs`         | Automatic API Swagger docs     |
 | `GET: /health`       | Health check endpoint          |
-| `GET: /example/test` | Simple example endpoint        |
-| `GET: /example/db`   | Database query example         |
-| `GET: /example/http` | HTTP client example            |
 
 ## Custom Cloudwatch Metrics
 
