@@ -58,6 +58,8 @@ This MCP server can run in two modes:
 
 Both of these can be ran locally but the Streamable HTTP App can also be accessed via the Defra CDP platform.
 
+Both modes can also be tested using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector).
+
 ### Streamable HTTP App
 
 To run the Streamable HTTP App, follow the instructions in the [Docker Compose section](#using-docker-compose) or use the provided script.
@@ -67,8 +69,6 @@ To run the MCP server in stdio mode, you will need to follow these steps:
 1. Sync the dependencies using `uv sync`
 2. Build the Python package using `uv build`
 3. Install the package globally using `pipx install .` or `pipx install . --force` if you have previously installed it.
-
-Both modes can be tested using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector).
 
 ## Local development
 
