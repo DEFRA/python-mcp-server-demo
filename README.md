@@ -50,6 +50,23 @@ uv run ruff check . --fix
 uv run ruff format .
 ```
 
+## Running MCP Server
+This MCP server can run in two modes:
+1. **Streamable HTTP App**: Runs as a FastAPI application, serving HTTP requests.
+2. **Standard Input/Output (stdio)**: Runs as a command-line application that reads from standard input and writes to standard output.
+
+Both of these can be ran locally but the Streamable HTTP App can also be accessed via the Defra CDP platform.
+
+### Streamable HTTP App
+
+To run the Streamable HTTP App, follow the instructions in the [Docker Compose section](#using-docker-compose) or use the provided script.
+
+### Standard Input/Output (stdio)
+To run the MCP server in stdio mode, you will need to follow these steps:
+1. Sync the dependencies using `uv sync`
+2. Build the Python package using `uv build`
+3. Install the package globally using `pipx install .` or `pipx install . --force` if you have previously installed it.
+
 ## Local development
 
 ### Setup & Configuration
