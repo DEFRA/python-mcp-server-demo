@@ -67,4 +67,4 @@ ARG PORT
 ENV PORT=${PORT}
 EXPOSE ${PORT}
 
-ENTRYPOINT [ "python-mcp-server-demo" ]
+ENTRYPOINT [ "python-mcp-server-demo-http" ]
